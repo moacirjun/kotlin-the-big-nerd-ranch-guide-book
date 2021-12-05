@@ -1,3 +1,5 @@
+package com.bignerdranch.nyethach
+
 fun main(args: Array<String>) {
     val name = "Modrigal"
     var healthPoints = 89

@@ -1,4 +1,6 @@
-fun main(args: Array<String>) {
+package com.bignerdranch.nyethach
+
+fun main() {
     val name = "Modrigal"
     var healthPoints = 89
     val isBlessed = true
