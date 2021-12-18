@@ -1,15 +1,37 @@
 package com.bignerdranch.nyethach
 
-class Player {
-    var name = "modrigal"
-    get() = field.replaceFirstChar { if (it.isLowerCase()) it.uppercase() else it.toString() }
-    set(value) {
-        field = value.trim()
+import java.io.File
+
+class Player(
+    _name: String,
+    var healthPoints: Int,
+    val isBlessed: Boolean,
+    private val isImmortal: Boolean
+) {
+    var name = _name
+        get() = "${capitalizeString(field)} of $hometown"
+        set(value) {
+            field = value.trim()
+        }
+
+    val hometown = selectHometown()
+
+    init {
+        require(healthPoints > 0) { "health points must be greater than 0." }
+        require(name.isNotBlank()) { "Player must have a name." }
     }
 
-    var healthPoints = 89
-    val isBlessed = true
-    private val isImmortal = false
+    constructor(name: String) : this(name, healthPoints = 100, isBlessed = true, isImmortal = false) {
+        if (name.lowercase() == "kar") healthPoints = 40
+    }
+
+    private fun capitalizeString(text: String) = text.replaceFirstChar { if (it.isLowerCase()) it.uppercase() else it.toString() }
+
+    private fun selectHometown() = File("data/towns.txt")
+        .readText()
+        .split("\n")
+        .shuffled()
+        .first()
 
     fun castFireball(numFireballs: Int = 2) =
         println("a glass of Fireball springs into existence. ($numFireballs)")

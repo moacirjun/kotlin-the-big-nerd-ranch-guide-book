@@ -1,7 +1,7 @@
 package com.bignerdranch.nyethach
 
 fun main() {
-    val player = Player()
+    val player = Player("madrigal")
     player.castFireball()
 
     printPlayerStatus(player)
