@@ -4,6 +4,10 @@ fun main() {
     val player = Player("madrigal")
     player.castFireball()
 
+    val currentRoom: Room = TownSquare()
+    println(currentRoom.description())
+    println(currentRoom.load())
+
     printPlayerStatus(player)
 }
 
