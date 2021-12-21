@@ -4,10 +4,10 @@ import java.io.File
 
 class Player(
     _name: String,
-    var healthPoints: Int,
+    override var healthPoints: Int,
     val isBlessed: Boolean,
     private val isImmortal: Boolean
-) {
+) : Fightable {
     var name = _name
         get() = "${capitalizeString(field)} of $hometown"
         set(value) {
@@ -55,4 +55,18 @@ class Player(
             in 15..74 -> "looks pretty hurt."
             else -> "is in awful condition!"
         }
+
+    override val diceCount = 3
+    override val diceSides = 6
+
+    override fun attack(opponent: Fightable): Int {
+        val damageDealt = if (isBlessed) {
+            damageRoll * 2
+        } else {
+            damageRoll
+        }
+        opponent.healthPoints -= damageDealt
+
+        return damageDealt
+    }
 }
